@@ -30,14 +30,14 @@ async function main() {
   // const lock = await hre.ethers.deployContract("FakeToken", [unlockTime], {
   //   value: lockedAmount,
   // });
-  const lock = await hre.ethers.deployContract("AFakeToken", [unlockTime], {
+  const lock = await hre.ethers.deployContract("FakeToken", [unlockTime], {
     value: lockedAmount,
   });
   
   await lock.waitForDeployment();
 
   console.log(
-    `AFakeToken with ${ethers.formatEther(
+    `FakeToken with ${ethers.formatEther(
       lockedAmount
     )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
   );
