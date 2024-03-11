@@ -43,8 +43,6 @@
             line-height: 80px;
             background-color: $colorG;
             color: $colorI;
-            margin-top: 16px;
-            
             .container{
                 @include flex();
                 border-radius: 16px;
@@ -60,9 +58,7 @@
                     color:  $colorI;
                     margin-right: 17px;
                 }
-                
             }
         }
-        
     }
 </style>

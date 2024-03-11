@@ -1,6 +1,8 @@
 <template>
-    <div>
-        footer
+    <div class="nav-footer">
+        <div class="container">
+            footer
+        </div>
     </div>
 </template>
 
@@ -11,3 +13,13 @@ export default {
     }
 }
 </script>
+<style lang="scss">
+@import '../assets/scss/config.scss';
+@import '../assets/scss/base.scss';
+
+.nav-footer {
+    .container {
+        
+    }
+}
+</style>

@@ -1,3 +1,19 @@
+// import { ethers } from "hardhat";
+// const hre = require("hardhat");
+// async function main() {
+
+//   // const FakeToken = await ethers.getContractFactory("FakeToken");
+//   const FakeToken = await hre.ethers.getContractFactory("FakeToken");
+//   const ftk = await FakeToken.deploy();
+
+//   await ftk.deployed();
+
+//   console.log(
+//     `FakeToken   deployed to ${ftk.address}`
+//   );
+// }
+
+
 // We require the Hardhat Runtime Environment explicitly here. This is optional
 // but useful for running the script in a standalone fashion through `node <script>`.
 //
@@ -11,18 +27,21 @@ async function main() {
   const unlockTime = currentTimestampInSeconds + 60;
 
   const lockedAmount = hre.ethers.parseEther("0.001");
-
-  const lock = await hre.ethers.deployContract("Lock", [unlockTime], {
+  // const lock = await hre.ethers.deployContract("FakeToken", [unlockTime], {
+  //   value: lockedAmount,
+  // });
+  const lock = await hre.ethers.deployContract("AFakeToken", [unlockTime], {
     value: lockedAmount,
   });
-
+  
   await lock.waitForDeployment();
 
   console.log(
-    `Lock with ${ethers.formatEther(
+    `AFakeToken with ${ethers.formatEther(
       lockedAmount
     )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
   );
+  
 }
 
 // We recommend this pattern to be able to use async/await everywhere
@@ -31,3 +50,6 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
+
+
+

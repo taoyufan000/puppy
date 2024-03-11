@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.0;
 /**
 *@title FakeToken
 *@dev ERC20 代币合约
  */
 
-contract FakeToken{
+contract AFakeToken{
 //代币名称
-string public name = "FakeToken";
+string public name = "AFakeToken";
 //代币符号
-string public symbol = "FTK";
+string public symbol = "AFTK";
 //保留多少位小数
 uint8 public decimals = 2;
 //发行总量
@@ -24,7 +24,7 @@ event Transfer(address indexed from,address indexed to,uint256 value);
 event Approval(address indexed owner,address indexed spender,uint256 value);
 
 //构造函数，设置Token持有的初始账户为创建代币合约的账户
-constructor() public {
+constructor(uint _unlockTime) payable{
     balances[msg.sender] = totalSupply;
 }
 /**
@@ -41,13 +41,13 @@ function balanceOf(address owner) public view returns (uint256){
 *@param value 要转移的Token数量
 *@return 是否转移成功
 */
-function transfer(address toAddr,uint256 value) public returns (bool){
-    require(balances[msg.sender] >= value);
-    balances[msg.sender] -= value;
-    balances[toAddr] += value;
-    emit Transfer(msg.sender, toAddr, value);
-    return true;
-}
+// function transfer(address toAddr,uint256 value) public returns (bool){
+//     require(balances[msg.sender] >= value);
+//     balances[msg.sender] -= value;
+//     balances[toAddr] += value;
+//     emit Transfer(msg.sender, toAddr, value);
+//     return true;
+// }
 /**
 *@dev 从授权账户转移Token
 *@param fromAddr 授权账户
@@ -55,26 +55,26 @@ function transfer(address toAddr,uint256 value) public returns (bool){
 *@param value 要转移的Token数量
 *@return 是否转移成功
 */
-function transferFrom(address fromAddr,address toAddr,uint256 value) public returns (bool){
-    require(balances[fromAddr] >= value);
-    require(allowances[fromAddr][msg.sender] >= value);
-    balances[fromAddr] -= value;
-    allowances[fromAddr][msg.sender] -= value;
-    balances[toAddr] += value;
-    emit Transfer(fromAddr, toAddr, value);
-    return true;
-}
+// function transferFrom(address fromAddr,address toAddr,uint256 value) public returns (bool){
+//     require(balances[fromAddr] >= value);
+//     require(allowances[fromAddr][msg.sender] >= value);
+//     balances[fromAddr] -= value;
+//     allowances[fromAddr][msg.sender] -= value;
+//     balances[toAddr] += value;
+//     emit Transfer(fromAddr, toAddr, value);
+//     return true;
+// }
 /**
 *@dev 授权给指定账户指定数量Token的使用权
 *@param spender 要授权的账户
 *@param value 要授权的Token数量
 *@return 授权操作是否成功
 */
-function approve(address spender,uint256 value) public returns (bool){
-    allowances[msg.sender][spender] = value;
-    emit Approval(msg.sender, spender, value);
-    return true;
-}
+// function approve(address spender,uint256 value) public returns (bool){
+//     allowances[msg.sender][spender] = value;
+//     emit Approval(msg.sender, spender, value);
+//     return true;
+// }
 /**
 *@dev 查看指定账户还有多少授权Token可以使用
 *@param owner 授权账户

@@ -3,19 +3,19 @@
         <div class="container">
             <div class="swap-box">
                 <div class="upper-card">
-                    <input type="upper-card-input">
+                    <input class="upper-card-input">
                     <div class="upper-card-operate">
                         BNB
                     </div>
                 </div>
                 <div class="middle-card">
-                    <div class="mid">
+                    <div class="mid-btn">
                         <div class="swap-icon"></div>
-                        <div class="swap-btn">兑换</div>
+                        <div class="swap-word">兑换</div>
                     </div>
                 </div>
                 <div class="lower-card">
-                    <input type="lower-card-input">
+                    <input class="lower-card-input">
                     <div class="lower-card-operate">
                         ETH
                     </div>
@@ -35,10 +35,10 @@ export default {
 
 <style lang="scss">
 @import '../assets/scss/config.scss';
-@import '../assets/scss/base.scss';
+// @import '../assets/scss/base.scss';
 @import '../assets/scss/mixin.scss';
 
-.container {
+// .container {
     .swap-box {
         .upper-card {
             @include flex();
@@ -49,33 +49,36 @@ export default {
             padding: 16px;
             margin-top: 16px;
             margin-bottom: 16px;
+            .upper-card-input{
+                width: 400px;   
+                height: 40px;
+            }
         }
-
         .middle-card {
-            background-color: $colorJ;
+            // background-color: $colorJ;
             border-radius: 16px;
-            height: 60px;
-            
-            .mid {
+            height: 50px;
+            padding-top: 15px;
+            padding-left: 125px;
+            .mid-btn {
                 display: flex;
                 border-radius: 16px;
                 background-color: $colorA;
                 position:relative;
-                margin:  auto;
                 justify-content: center;
-                height: 50%;
-                width: 50%;
-                
-                
+                height: 30px;
+                width: 250px;
+                cursor: pointer;
                 .swap-icon {
+                    padding-top: 5px;
                     @include bgImg(20px, 20px, "../assets/icon-down.png", 20px);
                 }
-                .swap-btn {
+                .swap-word {
+                    padding-top: 3px;
                     position: center;
                 }
             }
         }
-
         .lower-card {
             @include flex();
             background-color: $colorJ;
@@ -84,7 +87,11 @@ export default {
             line-height: 20px;
             padding: 16px;
             margin-top: 16px;
+            .lower-card-input{
+                width: 400px;   
+                height: 40px;
+            }
         }
     }
-}
+// }
 </style>
