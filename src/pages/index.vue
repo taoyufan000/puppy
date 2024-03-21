@@ -24,54 +24,59 @@
 </template>
 
 <script>
-import { ethers, Contract,parseUnits} from 'ethers'
+import { ethers, Contract, parseUnits } from 'ethers'
 export default {
-    name: 'index',
-    data() {
-        return {
-            symbol: ""
-        }
-    },
-    mounted(){
-        this.getSymbol()
-    },
-    components: {
-    },
-    methods: {
-        async transfer() {
-            let abi = [
-            "function transfer(address to, uint amount)"
-            ]
-            let provider = new ethers.BrowserProvider(window.ethereum)
-            let signer = await provider.getSigner();
-            // Connected to a Signer; can make state changing transactions,
-            // which will cost the account ether
-            let contract = new Contract("0x5FbDB2315678afecb367f032d93F642f64180aa3", abi, signer)
-            // Send 1 DAI
-            let amount = parseUnits("1.0", 2);
-            // Send the transaction
-            let tx = await contract.transfer("0x70997970C51812dc3A010C7d01b50e0d17dc79C8", amount)
-            // Currently the transaction has been sent to the mempool,
-            // but has not yet been included. So, we...
-
-            // ...wait for the transaction to be included.
-            await tx.wait()
-        },
-        async getSymbol() {
-            // The contract ABI (fragments we care about)
-            let abi = [
-                "function decimals() view returns (uint8)",
-                "function symbol() view returns (string)",
-                "function balanceOf(address a) view returns (uint)"
-            ]
-            let provider = new ethers.BrowserProvider(window.ethereum)
-            // Create a contract; connected to a Provider, so it may
-            // only access read-only methods (like view and pure)
-            let contract = new Contract("0x5FbDB2315678afecb367f032d93F642f64180aa3", abi, provider)
-            // The symbol name for the token
-            this.symbol = await contract.symbol()
-        }
+  name: 'index',
+  data() {
+    return {
+      symbol: ""
     }
+  },
+  mounted() {
+    this.getSymbol()
+  },
+  components: {
+  },
+  methods: {
+    async transfer() {
+      let abi = [
+        "function transfer(address to, uint amount)"
+      ]
+      let provider = new ethers.BrowserProvider(window.ethereum)
+      let signer = await provider.getSigner();
+      // Connected to a Signer; can make state changing transactions,
+      // which will cost the account ether
+      let contract = new Contract("0x5FbDB2315678afecb367f032d93F642f64180aa3", abi, signer)
+      // Send 1 DAI
+      let amount = parseUnits("1.0", 2);
+      // Send the transaction
+      let tx = await contract.transfer("0x70997970C51812dc3A010C7d01b50e0d17dc79C8", amount)
+      // Currently the transaction has been sent to the mempool,
+      // but has not yet been included. So, we...
+
+      // ...wait for the transaction to be included.
+      await tx.wait()
+    },
+    async getSymbol() {
+      try {
+        // The contract ABI (fragments we care about)
+        let abi = [
+          "function decimals() view returns (uint8)",
+          "function symbol() view returns (string)",
+          "function balanceOf(address a) view returns (uint)"
+        ]
+        let provider = new ethers.BrowserProvider(window.ethereum)
+        // Create a contract; connected to a Provider, so it may
+        // only access read-only methods (like view and pure)
+        let contract = new Contract("0x5FbDB2315678afecb367f032d93F642f64180aa3", abi, provider)
+        // The symbol name for the token
+        this.symbol = await contract.symbol()
+      } catch (err) {
+        console.log("未获取Symbol！")
+      }
+
+    }
+  }
 }
 </script>
 
@@ -143,5 +148,4 @@ export default {
   }
 }
 
-// }
-</style>
+// }</style>
